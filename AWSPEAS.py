@@ -651,11 +651,14 @@ class AWSPEASS(CloudPEASS):
             selected_combination = -1
             while not selected_comb:
                 selected_combination = input(f"{Fore.YELLOW}Select a combination to add those permissions to check from 1 to {i} (1 is the recommended one) or -1 to not add any: {Fore.RESET}")
-                selected_combination = int(selected_combination)
-                if selected_combination < -1 or selected_combination == 0 or selected_combination > i:
-                    print(f"{Fore.RED}Invalid selection. Try again.{Fore.RESET}")
-                else:
-                    selected_comb = True
+                try:
+                    selected_combination = int(selected_combination)
+                    if selected_combination < -1 or selected_combination == 0 or selected_combination > i:
+                        print(f"{Fore.RED}Invalid selection. Try again.{Fore.RESET}")
+                    else:
+                        selected_comb = True
+                except ValueError:
+                    print(f"{Fore.RED}Invalid input. Please enter a number.{Fore.RESET}")
             
             if selected_combination != -1:
                 selected_combination -= 1
